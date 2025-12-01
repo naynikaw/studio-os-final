@@ -1,0 +1,11 @@
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+pydantic==2.9.2
+python-multipart==0.0.12
+httpx==0.26.0
+pandas==2.2.3
+python-dateutil==2.9.0
+packaging==24.2
+requests==2.32.3
+tqdm==4.66.5
+openai==1.54.3

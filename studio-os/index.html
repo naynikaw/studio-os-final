@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudioOS v1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            studio: {
+              50: '#f2fcf5',
+              100: '#e1f8e8',
+              200: '#c3eed0',
+              300: '#96deb0',
+              400: '#62c58a',
+              500: '#3ba568',
+              600: '#2b8551',
+              700: '#246a43',
+              800: '#205438',
+              900: '#1b4530',
+              950: '#0d261a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #f8fafc;
+    }
+
+    /* Markdown Styles */
+    .prose h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      color: #111827;
+    }
+
+    .prose h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.2em;
+      margin-bottom: 0.5em;
+      color: #374151;
+    }
+
+    .prose h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+      color: #374151;
+    }
+
+    .prose p {
+      margin-bottom: 1em;
+      line-height: 1.6;
+      color: #4b5563;
+    }
+
+    .prose ul {
+      list-style-type: disc;
+      padding-left: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    .prose ol {
+      list-style-type: decimal;
+      padding-left: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    .prose li {
+      margin-bottom: 0.25em;
+    }
+
+    .prose strong {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .prose blockquote {
+      border-left: 4px solid #e5e7eb;
+      padding-left: 1em;
+      font-style: italic;
+      color: #6b7280;
+      margin-bottom: 1em;
+    }
+
+    /* Table Styles */
+    .prose table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5em;
+      font-size: 0.9em;
+    }
+
+    .prose th {
+      background-color: #f3f4f6;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+    }
+
+    .prose td {
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+    }
+
+    .prose tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

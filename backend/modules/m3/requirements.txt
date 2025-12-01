@@ -1,0 +1,28 @@
+# FastAPI and server dependencies
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+pydantic==2.9.2
+python-multipart==0.0.12
+
+# Module M2 dependencies
+pandas==2.2.3
+praw==7.7.1
+python-dateutil==2.9.0
+packaging==24.2
+
+# Module M3 dependencies
+arxiv==2.3.0
+orjson==3.10.7
+# requests==2.32.3
+
+# Module M4 dependencies
+openai==1.54.3
+
+# Module M5 dependencies
+# (uses google-generativeai, json, textwrap - all standard)
+
+# Module M6 dependencies
+# (uses google-generativeai, requests - covered above)
+
+# Shared LLM dependencies
+google-generativeai==0.7.2

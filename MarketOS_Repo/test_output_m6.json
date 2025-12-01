@@ -1,0 +1,141 @@
+{
+  "report_type": "Comprehensive Market & Competitive Intelligence Report",
+  "sections": {
+    "competitor_profiles": [
+      {
+        "name": "AlphaSense",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      },
+      {
+        "name": "AptEdge",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      },
+      {
+        "name": "Brandwatch",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      },
+      {
+        "name": "CB Insights",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      },
+      {
+        "name": "Comintelli",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      },
+      {
+        "name": "Contify",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      },
+      {
+        "name": "Crayon",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      },
+      {
+        "name": "Crunchbase",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      },
+      {
+        "name": "Digimind",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      },
+      {
+        "name": "Euromonitor International",
+        "segment": "Uncategorized",
+        "regions": [],
+        "signal_score": 0,
+        "icp_tags": [],
+        "evidence": []
+      }
+    ],
+    "swot_analysis": {
+      "strengths": [
+        "High automation (agents/orchestration)",
+        "Real-time news grounding"
+      ],
+      "weaknesses": [
+        "Limited proprietary datasets",
+        "Brand & coverage still growing"
+      ],
+      "opportunities": [
+        "Low-density segments",
+        "Unserved ICP niches / verticals"
+      ],
+      "threats": [
+        "Incumbents with strong data moats",
+        "Vendor dependency for data sources"
+      ]
+    },
+    "market_segmentation_and_sizing": {},
+    "barriers_to_entry": {
+      "technical": [
+        "Data crawling & normalization",
+        "Evaluation infrastructure for accuracy"
+      ],
+      "regulatory": [
+        "Privacy/compliance (GDPR/CCPA)",
+        "Data usage rights"
+      ],
+      "financial": [
+        "Licensing cost for high-quality data"
+      ],
+      "distribution": [
+        "Enterprise sales cycles & integrations"
+      ]
+    },
+    "past_successes_failures": {
+      "success_patterns": [
+        "Deep workflow integration",
+        "Partnerships with data providers/integrations"
+      ],
+      "failure_patterns": [
+        "Single-purpose tools w/o distribution",
+        "Poor data quality or regulatory issues"
+      ]
+    },
+    "white_space_opportunities": {
+      "description": "Areas with few strong players and weak momentum signals.",
+      "segments": []
+    }
+  },
+  "inputs": {
+    "news_sample": [],
+    "papers_sample": [],
+    "paper_trends": []
+  }
+}
