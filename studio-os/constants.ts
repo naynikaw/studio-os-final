@@ -2,6 +2,7 @@
 import { ModuleDefinition } from './types';
 
 export const APP_NAME = "StudioOS v1";
+export const ENABLE_USER_CONTEXT = true;
 
 // The specific "GoodFutures" persona instructions from the PDF
 export const CORE_SYSTEM_INSTRUCTION = `

@@ -11,16 +11,16 @@ interface SidebarProps {
   onDeleteProject: (id: string, e: React.MouseEvent) => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ 
-  modules, 
-  globalState, 
-  onSelectModule, 
-  onCreateProject, 
+export const Sidebar: React.FC<SidebarProps> = ({
+  modules,
+  globalState,
+  onSelectModule,
+  onCreateProject,
   onSwitchProject,
   onDeleteProject
 }) => {
   const [showProjects, setShowProjects] = useState(false);
-  
+
   const activeProject = globalState.projects[globalState.activeProjectId];
   // Fix: Cast Object.values to ProjectState[] to explicitly tell TypeScript the type, resolving 'unknown' property access errors
   const sortedProjects = (Object.values(globalState.projects) as ProjectState[]).sort((a, b) => b.lastModified - a.lastModified);
@@ -39,19 +39,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div className="w-80 bg-white border-r border-gray-200 flex flex-col h-screen sticky top-0 overflow-hidden">
       {/* Brand Header */}
-      <div className="p-6 border-b border-gray-100 bg-studio-50 flex-shrink-0">
+      <div className="p-6 border-b border-studio-700 bg-studio-800 flex-shrink-0">
         <div className="flex items-center space-x-2 mb-2">
-          <div className="w-8 h-8 bg-studio-600 rounded-lg flex items-center justify-center">
-            <LayoutDashboard className="text-white w-5 h-5" />
+          <div className="w-8 h-8 bg-catalyst rounded-lg flex items-center justify-center">
+            <LayoutDashboard className="text-charcoal w-5 h-5" />
           </div>
-          <h1 className="text-xl font-bold text-gray-800 tracking-tight">StudioOS <span className="text-studio-600 text-sm align-top">v1</span></h1>
+          <h1 className="text-xl font-serif font-bold text-white tracking-tight">StudioOS <span className="text-studio-200 text-sm align-top">v1</span></h1>
         </div>
-        <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mt-2">Venture Automation</p>
+        <p className="text-xs text-studio-200 font-medium uppercase tracking-wider mt-2">Venture Automation</p>
       </div>
 
       {/* Project Switcher / Creation */}
       <div className="p-4 border-b border-gray-100">
-        <button 
+        <button
           onClick={() => setShowProjects(!showProjects)}
           className="w-full flex items-center justify-between px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors border border-gray-200"
         >
@@ -77,16 +77,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <Plus className="w-4 h-4 mr-2" /> New Venture Analysis
             </button>
             {sortedProjects.map(p => (
-              <div 
-                key={p.id} 
+              <div
+                key={p.id}
                 onClick={() => { onSwitchProject(p.id); setShowProjects(false); }}
-                className={`group w-full flex items-center justify-between px-3 py-2 text-sm rounded-md cursor-pointer ${
-                  p.id === activeProject.id ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
-                }`}
+                className={`group w-full flex items-center justify-between px-3 py-2 text-sm rounded-md cursor-pointer ${p.id === activeProject.id ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
+                  }`}
               >
                 <span className="truncate flex-1">{p.name}</span>
                 {sortedProjects.length > 1 && (
-                  <button 
+                  <button
                     onClick={(e) => { e.stopPropagation(); onDeleteProject(p.id, e); }}
                     className="p-1 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
                   >
@@ -115,13 +114,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 key={module.id}
                 onClick={() => !isLocked && onSelectModule(module.id)}
                 disabled={isLocked}
-                className={`w-full flex items-center px-3 py-3 text-sm font-medium rounded-md transition-colors ${
-                  isActive 
-                    ? 'bg-studio-100 text-studio-900' 
-                    : isLocked 
-                      ? 'text-gray-400 cursor-not-allowed' 
+                className={`w-full flex items-center px-3 py-3 text-sm font-medium rounded-md transition-colors ${isActive
+                    ? 'bg-studio-100 text-studio-900'
+                    : isLocked
+                      ? 'text-gray-400 cursor-not-allowed'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                }`}
+                  }`}
               >
                 <span className="mr-3 flex-shrink-0">{getStatusIcon(status)}</span>
                 <span className="truncate text-left">{module.title}</span>
@@ -130,7 +128,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           })}
         </nav>
       </div>
-      
+
       <div className="p-4 border-t border-gray-200 bg-gray-50">
         <div className="text-xs text-gray-400 text-center">
           Powered by Google Gemini 3 Pro

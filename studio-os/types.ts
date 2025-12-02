@@ -12,11 +12,11 @@ export interface ModuleDefinition {
   id: string;
   title: string;
   description: string;
-  inputs: string[]; 
-  systemPromptKey: string; 
-  isManualInput?: boolean; 
-  useThinking?: boolean; 
-  useGrounding?: boolean; 
+  inputs: string[];
+  systemPromptKey: string;
+  isManualInput?: boolean;
+  useThinking?: boolean;
+  useGrounding?: boolean;
 }
 
 export interface GroundingSource {
@@ -43,35 +43,43 @@ export interface ModuleVersion {
 
 export interface ModuleData {
   status: ModuleStatus;
-  output: string | null; 
-  sources: GroundingSource[]; 
+  output: string | null;
+  sources: GroundingSource[];
   chatHistory: ChatMessage[]; // New: Conversational history for this module
-  feedback: string | null; 
+  feedback: string | null;
   timestamp: number;
-  versions: ModuleVersion[]; 
+  versions: ModuleVersion[];
 }
 
 export interface ProjectState {
   id: string;
   name: string;
-  theme: string; 
+  theme: string;
   modules: Record<string, ModuleData>;
   currentModuleId: string;
   autoRun: boolean;
   lastModified: number;
 }
 
+export interface UserContext {
+  persona: string;
+  primaryGoal: string;
+  secondaryGoal?: string;
+  focusArea?: string;
+}
+
 export interface GlobalState {
   projects: Record<string, ProjectState>;
   activeProjectId: string;
   apiKey: string | null;
-  hasSeenWelcome: boolean; // New: Onboarding tracking
+  hasSeenWelcome: boolean;
+  userContext?: UserContext; // New: Onboarding context
 }
 
 export interface GeneratePayload {
   systemInstruction: string;
   prompt: string;
-  history: string; 
+  history: string;
   useThinking: boolean;
   useGrounding: boolean;
 }

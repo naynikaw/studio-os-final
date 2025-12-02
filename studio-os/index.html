@@ -6,30 +6,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StudioOS v1</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Marcellus&display=swap"
     rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['Manrope', 'Inter', 'sans-serif'],
+            serif: ['Marcellus', 'serif'],
             mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
+            // "Grounded Accent" - Forest Green Scale
             studio: {
-              50: '#f2fcf5',
-              100: '#e1f8e8',
-              200: '#c3eed0',
-              300: '#96deb0',
-              400: '#62c58a',
-              500: '#3ba568',
-              600: '#2b8551',
-              700: '#246a43',
-              800: '#205438',
-              900: '#1b4530',
-              950: '#0d261a',
+              50: '#F4F7F6',
+              100: '#E3EBE8',
+              200: '#C5D6CF',
+              300: '#9EBDB3',
+              400: '#749F92',
+              500: '#528374',
+              600: '#386658',
+              700: '#2A5246',
+              800: '#1E3B33', // Primary Brand Color
+              900: '#19312B',
+              950: '#0E1D19',
+            },
+            // "Catalyst Accent" - Amber/Gold
+            catalyst: {
+              DEFAULT: '#FFB800',
+              500: '#FFB800',
+              600: '#E5A600', // Darker for hover
+            },
+            // "Primary Base"
+            base: {
+              50: '#F8F8F6', // Off-white
+              100: '#EAEAE8', // Warm Gray
+            },
+            // "Primary Text"
+            charcoal: {
+              DEFAULT: '#212121',
+              50: '#f6f6f6',
+              100: '#e7e7e7',
+              200: '#d1d1d1',
+              300: '#b0b0b0',
+              400: '#888888',
+              500: '#6d6d6d',
+              600: '#5d5d5d',
+              700: '#4f4f4f',
+              800: '#454545',
+              900: '#212121', // Base
+              950: '#000000',
             }
           }
         }

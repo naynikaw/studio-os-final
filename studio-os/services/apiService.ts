@@ -1,4 +1,5 @@
-import { ModuleData } from '../types';
+import { ModuleData, UserContext } from '../types';
+import { ENABLE_USER_CONTEXT } from '../constants';
 
 const API_BASE_URL = 'http://localhost:8000'; // Default local Flask port
 
@@ -8,7 +9,7 @@ export interface BackendResponse {
     message?: string;
 }
 
-export const runBackendModule = async (moduleId: string, prompt: string, apiKey?: string): Promise<any> => {
+export const runBackendModule = async (moduleId: string, prompt: string, apiKey?: string, userContext?: UserContext): Promise<any> => {
     // Map module IDs to endpoints
     const endpointMap: Record<string, string> = {
         'mod-2': '/api/m2',
@@ -23,13 +24,18 @@ export const runBackendModule = async (moduleId: string, prompt: string, apiKey?
         throw new Error(`No backend endpoint for module ${moduleId}`);
     }
 
+    const payload: any = { prompt, apiKey };
+    if (ENABLE_USER_CONTEXT && userContext) {
+        payload.user_context = userContext;
+    }
+
     try {
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ prompt, apiKey }),
+            body: JSON.stringify(payload),
         });
 
         if (!response.ok) {

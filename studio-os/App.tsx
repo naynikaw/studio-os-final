@@ -3,7 +3,8 @@ import { Sidebar } from './components/Sidebar';
 import { ModuleView } from './components/ModuleView';
 import { WelcomeModal } from './components/WelcomeModal';
 import { MODULES, PROMPTS, CORE_SYSTEM_INSTRUCTION, APP_NAME } from './constants';
-import { ProjectState, ModuleStatus, ModuleData, GlobalState, ChatMessage, GroundingSource } from './types';
+import { OnboardingFlow } from './components/OnboardingFlow';
+import { ProjectState, ModuleStatus, ModuleData, GlobalState, ChatMessage, GroundingSource, UserContext } from './types';
 import { generateGeminiResponse, generateChatResponse } from './services/geminiService';
 import { Settings, Key, ToggleLeft, ToggleRight, Download, Info } from 'lucide-react';
 
@@ -116,6 +117,10 @@ const App: React.FC = () => {
   const closeWelcome = () => {
     setShowWelcome(false);
     setGlobalState(prev => ({ ...prev, hasSeenWelcome: true }));
+  };
+
+  const handleOnboardingComplete = (context: UserContext) => {
+    setGlobalState(prev => ({ ...prev, userContext: context }));
   };
 
   // --- Continuous Mode Waterfall Logic ---
@@ -393,7 +398,7 @@ const App: React.FC = () => {
           // Import dynamically to avoid top-level issues if file missing
           const { runBackendModule } = await import('./services/apiService');
           console.log(`Fetching external data for ${moduleId}...`);
-          backendData = await runBackendModule(moduleId, effectiveTheme, globalState.apiKey);
+          backendData = await runBackendModule(moduleId, effectiveTheme, globalState.apiKey, globalState.userContext);
         } catch (err) {
           console.warn("Backend integration failed, falling back to pure Gemini:", err);
           // Optional: Notify user via UI? For now, we log and proceed with pure Gemini
@@ -736,7 +741,9 @@ const App: React.FC = () => {
   });
 
   return (
-    <div className="flex h-screen bg-gray-50 text-gray-900 font-sans">
+    <div className="flex h-screen bg-base-50 text-charcoal font-sans">
+      {!globalState.userContext && <OnboardingFlow onComplete={handleOnboardingComplete} />}
+
       <Sidebar
         modules={MODULES}
         globalState={globalState}
@@ -753,8 +760,8 @@ const App: React.FC = () => {
             {/* Auto-Run Toggle */}
             <div className="flex items-center bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
               <span className="text-xs font-medium text-gray-600 mr-2">Continuous Mode</span>
-              <button onClick={toggleAutoRun} className={`text-studio-600 focus:outline-none`}>
-                {activeProject.autoRun ? <ToggleRight className="w-8 h-8 fill-studio-100" /> : <ToggleLeft className="w-8 h-8 text-gray-300" />}
+              <button onClick={toggleAutoRun} className={`text-catalyst focus:outline-none`}>
+                {activeProject.autoRun ? <ToggleRight className="w-8 h-8 fill-catalyst" /> : <ToggleLeft className="w-8 h-8 text-gray-300" />}
               </button>
             </div>
           </div>

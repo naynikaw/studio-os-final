@@ -16,11 +16,11 @@ interface ModuleViewProps {
 
 export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projectTheme, onRun, onStop, onChat, canRun }) => {
   const [manualInput, setManualInput] = React.useState(definition.isManualInput ? projectTheme : '');
-  const [selectedVersionIndex, setSelectedVersionIndex] = useState<number>(-1); 
+  const [selectedVersionIndex, setSelectedVersionIndex] = useState<number>(-1);
   const [chatInput, setChatInput] = useState('');
   const [isChatting, setIsChatting] = useState(false);
   const [chatFiles, setChatFiles] = useState<File[]>([]);
-  
+
   const bottomRef = useRef<HTMLDivElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -73,7 +73,7 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
 
   const handleSendChat = async () => {
     if ((!chatInput.trim() && chatFiles.length === 0) || isChatting) return;
-    
+
     setIsChatting(true);
     try {
       await onChat(chatInput, chatFiles);
@@ -112,16 +112,16 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
         <div className="flex justify-between items-start">
           <div>
             <div className="flex items-center space-x-2">
-              <h2 className="text-2xl font-bold text-gray-900">{definition.title}</h2>
+              <h2 className="text-2xl font-serif font-bold text-charcoal">{definition.title}</h2>
               {definition.useThinking && (
                 <span className="bg-purple-50 text-purple-700 text-xs px-2 py-1 rounded-full border border-purple-100 flex items-center">
                   <Sparkles className="w-3 h-3 mr-1" /> Thinking
                 </span>
               )}
               {definition.useGrounding && (
-                 <span className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-full border border-blue-100 flex items-center">
-                 <Globe className="w-3 h-3 mr-1" /> Live Search
-               </span>
+                <span className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-full border border-blue-100 flex items-center">
+                  <Globe className="w-3 h-3 mr-1" /> Live Search
+                </span>
               )}
             </div>
             <p className="mt-2 text-gray-500">{definition.description}</p>
@@ -137,14 +137,14 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
                 </button>
                 <div className="absolute right-0 mt-1 w-64 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10 max-h-64 overflow-y-auto">
                   <div className="py-1">
-                    <button 
+                    <button
                       onClick={() => setSelectedVersionIndex(-1)}
                       className={`block w-full text-left px-4 py-2 text-sm ${selectedVersionIndex === -1 ? 'bg-studio-50 text-studio-700' : 'text-gray-700 hover:bg-gray-50'}`}
                     >
                       Latest Result
                     </button>
                     {data.versions.map((v, idx) => (
-                      <button 
+                      <button
                         key={idx}
                         onClick={() => setSelectedVersionIndex(idx)}
                         className={`block w-full text-left px-4 py-2 text-sm ${selectedVersionIndex === idx ? 'bg-studio-50 text-studio-700' : 'text-gray-700 hover:bg-gray-50'}`}
@@ -206,7 +206,7 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
               <button
                 onClick={handleRun}
                 disabled={!manualInput.trim()}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-studio-600 hover:bg-studio-700 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-charcoal bg-catalyst hover:bg-catalyst-600 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Start Research <ChevronRight className="ml-2 w-4 h-4" />
               </button>
@@ -226,7 +226,7 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
             <button
               onClick={handleRun}
               disabled={!canRun}
-              className="inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-studio-600 hover:bg-studio-700 focus:outline-none disabled:bg-gray-300"
+              className="inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-charcoal bg-catalyst hover:bg-catalyst-600 focus:outline-none disabled:bg-gray-300"
             >
               <Play className="w-4 h-4 mr-2" />
               Generate Analysis
@@ -234,13 +234,13 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
           </div>
         </div>
       )}
-      
+
       {/* Interrupted / Error State */}
       {data.status === ModuleStatus.INTERRUPTED && (
-         <div className="px-8 py-4 bg-amber-50 border-b border-amber-100 shrink-0 flex items-center text-amber-800">
-            <AlertOctagon className="w-5 h-5 mr-2" />
-            <span className="text-sm font-medium">Analysis was interrupted (power loss or reload). Use "Re-run" to restart.</span>
-         </div>
+        <div className="px-8 py-4 bg-amber-50 border-b border-amber-100 shrink-0 flex items-center text-amber-800">
+          <AlertOctagon className="w-5 h-5 mr-2" />
+          <span className="text-sm font-medium">Analysis was interrupted (power loss or reload). Use "Re-run" to restart.</span>
+        </div>
       )}
 
       {/* Content Area */}
@@ -258,9 +258,9 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
           {displayOutput ? (
             <>
               {selectedVersionIndex !== -1 && (
-                  <div className="mb-6 p-3 bg-gray-100 rounded text-xs text-gray-500 text-center">
-                    Viewing historical version from {new Date(data.versions[selectedVersionIndex].timestamp).toLocaleString()}
-                  </div>
+                <div className="mb-6 p-3 bg-gray-100 rounded text-xs text-gray-500 text-center">
+                  Viewing historical version from {new Date(data.versions[selectedVersionIndex].timestamp).toLocaleString()}
+                </div>
               )}
               <div className="prose prose-studio max-w-none mb-12">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{displayOutput}</ReactMarkdown>
@@ -274,10 +274,10 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {displaySources.map((source, idx) => (
-                      <a 
-                        key={idx} 
-                        href={source.uri} 
-                        target="_blank" 
+                      <a
+                        key={idx}
+                        href={source.uri}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center p-2 rounded-md hover:bg-gray-50 border border-transparent hover:border-gray-200 group transition-all"
                       >
@@ -298,9 +298,9 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
               <div className="mt-12 border-t-2 border-gray-100 pt-8 pb-4">
                 <div className="flex items-center mb-6">
                   <MessageSquare className="w-5 h-5 text-studio-600 mr-2" />
-                  <h3 className="text-lg font-bold text-gray-800">Deep Dive & Discussion</h3>
+                  <h3 className="text-lg font-serif font-bold text-charcoal">Deep Dive & Discussion</h3>
                 </div>
-                
+
                 <div className="bg-gray-50 rounded-xl p-4 min-h-[200px] mb-4 border border-gray-200">
                   {displayChat.length === 0 ? (
                     <div className="text-center py-8 text-gray-400 text-sm">
@@ -311,20 +311,19 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
                     <div className="space-y-6">
                       {displayChat.map((msg, idx) => (
                         <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                          <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                            msg.role === 'user' 
-                              ? 'bg-studio-600 text-white rounded-br-none' 
-                              : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none shadow-sm'
-                          }`}>
+                          <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${msg.role === 'user'
+                              ? 'bg-studio-700 text-white rounded-br-none'
+                              : 'bg-white border border-gray-200 text-charcoal rounded-bl-none shadow-sm'
+                            }`}>
                             {/* Attachments */}
                             {msg.attachments && msg.attachments.length > 0 && (
-                               <div className="flex gap-2 mb-2 overflow-x-auto">
-                                 {msg.attachments.map((att, i) => (
-                                   <div key={i} className="text-xs bg-black/20 p-1 rounded text-white flex items-center">
-                                     <Paperclip className="w-3 h-3 mr-1" /> Attachment
-                                   </div>
-                                 ))}
-                               </div>
+                              <div className="flex gap-2 mb-2 overflow-x-auto">
+                                {msg.attachments.map((att, i) => (
+                                  <div key={i} className="text-xs bg-black/20 p-1 rounded text-white flex items-center">
+                                    <Paperclip className="w-3 h-3 mr-1" /> Attachment
+                                  </div>
+                                ))}
+                              </div>
                             )}
                             <div className={`text-sm ${msg.role === 'user' ? 'text-white' : 'prose prose-sm max-w-none'}`}>
                               {msg.role === 'user' ? msg.text : <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.text}</ReactMarkdown>}
@@ -336,15 +335,15 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
                         </div>
                       ))}
                       {isChatting && (
-                         <div className="flex justify-start">
-                            <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 rounded-bl-none shadow-sm">
-                              <div className="flex space-x-1">
-                                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                              </div>
+                        <div className="flex justify-start">
+                          <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 rounded-bl-none shadow-sm">
+                            <div className="flex space-x-1">
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                             </div>
-                         </div>
+                          </div>
+                        </div>
                       )}
                       <div ref={chatEndRef} />
                     </div>
@@ -365,19 +364,19 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
                       </div>
                     )}
                     <div className="flex gap-2 items-end">
-                      <button 
+                      <button
                         onClick={() => fileInputRef.current?.click()}
                         className="p-3 text-gray-400 hover:text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors h-[50px]"
                         title="Upload file"
                       >
                         <Paperclip className="w-5 h-5" />
                       </button>
-                      <input 
-                        type="file" 
-                        ref={fileInputRef} 
-                        onChange={handleFileSelect} 
-                        className="hidden" 
-                        multiple 
+                      <input
+                        type="file"
+                        ref={fileInputRef}
+                        onChange={handleFileSelect}
+                        className="hidden"
+                        multiple
                         accept="image/*,application/pdf,.txt"
                       />
                       <div className="flex-1 relative">
@@ -394,7 +393,7 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
                         <button
                           onClick={handleSendChat}
                           disabled={(!chatInput.trim() && chatFiles.length === 0) || isChatting}
-                          className="absolute right-2 bottom-2 p-1.5 bg-studio-600 text-white rounded-md hover:bg-studio-700 disabled:opacity-50 transition-colors mb-1"
+                          className="absolute right-2 bottom-2 p-1.5 bg-catalyst text-charcoal rounded-md hover:bg-catalyst-600 disabled:opacity-50 transition-colors mb-1"
                         >
                           <Send className="w-4 h-4" />
                         </button>
@@ -410,7 +409,7 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
               Error generating content. Please try re-running the module.
             </div>
           ) : null}
-          
+
           <div ref={bottomRef} />
         </div>
       </div>
