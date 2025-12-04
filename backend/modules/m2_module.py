@@ -966,15 +966,34 @@ def run_m2(problem: str, api_key: str = None, max_results: int = 10, include_rep
             "work_signals": int(df["is_work"].sum()) if not df.empty else 0,
         }
         
+        # # Build citations list
+        # citations = []
+        # if not df.empty:
+        #     for _, row in df.head(20).iterrows():
+        #         citations.append({
+        #             "title": row.get("title", "Reddit Post"),
+        #             "uri": row.get("permalink", ""),
+        #             "source": "Reddit"
+        #         })
+
         # Build citations list
         citations = []
         if not df.empty:
             for _, row in df.head(20).iterrows():
+                raw = (row.get("permalink") or "").strip()
+
+                # If Reddit returned a relative permalink like "/r/…",
+                # turn it into a full URL so the frontend opens reddit.com,
+                # not the StudioOS origin.
+                if raw and not raw.startswith("http"):
+                    raw = f"https://www.reddit.com{raw}"
+
                 citations.append({
                     "title": row.get("title", "Reddit Post"),
-                    "uri": row.get("permalink", ""),
+                    "uri": raw,
                     "source": "Reddit"
                 })
+
 
         return {
             "assessment": pvi.get("rating", "Weak"),

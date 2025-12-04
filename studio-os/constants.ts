@@ -178,25 +178,102 @@ export const PROMPTS: Record<string, string> = {
   
   Deliverable: A concise brief titled "Emerging Opportunity Analysis." Present the top 3 ranked problem statements. For each, provide a 2-3 sentence paragraph explaining the underlying trend and evidence. CITING SOURCES IS MANDATORY.
   `,
-  PROMPT_MOD_2: `
-  Primary Objective: To find undeniable, qualitative evidence that a given problem statement causes significant, emotionally resonant pain.
+  // PROMPT_MOD_2: `
+  // Primary Objective: To find undeniable, qualitative evidence that a given problem statement causes significant, emotionally resonant pain.
   
-  Strategic Mindset: Think like a skeptical product manager conducting user research. Look for visceral, unsolicited proof of pain.
+  // Strategic Mindset: Think like a skeptical product manager conducting user research. Look for visceral, unsolicited proof of pain.
   
-  Action Required:
-  Use Google Search to find direct evidence.
-  - Search query format suggestions: "site:reddit.com [problem] frustration", "site:news.ycombinator.com [problem]", "site:twitter.com [problem] sucks".
-  - Look for recent academic papers on Arxiv that describe this problem gap.
+  // Action Required:
+  // Use Google Search to find direct evidence.
+  // - Search query format suggestions: "site:reddit.com [problem] frustration", "site:news.ycombinator.com [problem]", "site:twitter.com [problem] sucks".
+  // - Look for recent academic papers on Arxiv that describe this problem gap.
   
-  Process:
-  1. Evidence Foraging: Look for the "shadow" of the problem (frustrated expressions, "how to fix", workarounds).
-  2. Workaround Analysis: Identify complex ad-hoc systems people build to cope.
-  3. Categorize: Pain Expression, Solution Seeking, Workaround Sharing.
+  // Process:
+  // 1. Evidence Foraging: Look for the "shadow" of the problem (frustrated expressions, "how to fix", workarounds).
+  // 2. Workaround Analysis: Identify complex ad-hoc systems people build to cope.
+  // 3. Categorize: Pain Expression, Solution Seeking, Workaround Sharing.
   
-  Deliverable: A "Problem Validation Brief." Start with a one-word assessment (Weak, Moderate, Strong). Follow with a 2-sentence summary. Then present the "body of evidence": quotes/scenarios for Pain, Seeking, and Workarounds found via Search.
+  // Deliverable: A "Problem Validation Brief." Start with a one-word assessment (Weak, Moderate, Strong). Follow with a 2-sentence summary. Then present the "body of evidence": quotes/scenarios for Pain, Seeking, and Workarounds found via Search.
   
-  CRITICAL: You MUST cite your sources using the provided 'VERIFIED EXTERNAL DATA'. Use inline markdown links for citations, e.g., '...users complain about X [Reddit Thread](URL)' or '...as seen in [Source Title](URL)'. Do NOT anonymize sources if a URL is available.
-  `,
+  // CRITICAL: You MUST cite your sources using the provided 'VERIFIED EXTERNAL DATA'. Use inline markdown links for citations, e.g., '...users complain about X [Reddit Thread](URL)' or '...as seen in [Source Title](URL)'. Do NOT anonymize sources if a URL is available.
+  // `,
+
+PROMPT_MOD_2: `
+Primary Objective:
+To find undeniable, qualitative evidence that a given problem statement causes significant, emotionally resonant pain.
+
+Strategic Mindset:
+Think like a skeptical product manager conducting user research. Look for visceral, unsolicited proof of pain — not polite feature requests or hindsight explanations.
+
+Action Required:
+Use Google Search and the provided tool output to find direct evidence.
+- Example query formats: "site:reddit.com [problem] frustration", "site:news.ycombinator.com [problem]", "site:twitter.com [problem] sucks".
+- Look for recent academic papers on Arxiv only if they clearly describe an unmet gap or real-world struggle.
+
+Process:
+1. Evidence Foraging: Look for the “shadow” of the problem — frustrated expressions, anxiety, repeated questions, and visible coping behaviors.
+2. Workaround Analysis: Identify complex or high-friction systems people build to cope.
+3. Categorization: Pain Expression, Solution Seeking, Workaround Sharing.
+
+Deliverable:
+A **Problem Validation Brief** with the following structure.
+
+STRUCTURE & METRICS (IMPORTANT):
+
+1. Assessment + Summary
+- Start with a bolded assessment line in the exact format:
+  **Assessment:** Weak | Moderate | Strong
+- Follow with a concise 1–2 sentence summary describing how real, frequent, and emotionally meaningful the problem appears in the data.
+
+2. Metrics Snapshot (only if tool output provides them)
+- Immediately after the summary, surface any available structured metrics.
+- Use **bold labels**, clean formatting, and the *exact numbers* from the tool output.
+- Do NOT invent, estimate, or normalize metrics.
+
+Example formatting (use only the lines that apply):
+
+**Evidence snapshot:** Out of 35 posts analyzed (buckets can overlap), 7 (20%) showed pain, 35 (100%) were seeking solutions, and 4 (11%) described workarounds.  
+**Evidence window:** 2022-03-27 → 2025-03-28 (UTC)  
+**Sentiment distribution:** Negative 4 (11%), Positive 13 (37%), Neutral 18 (51%)
+
+**Problem Validation Index (PVI):** 54.8 / 100 (Moderate)
+
+Immediately after the PVI line, add a short explanation (1–2 sentences max) that explains what this score represents at a high level.
+- Describe PVI as a composite signal that reflects how often the problem appears, how recently it is discussed, and how emotionally charged the conversations around it are.
+- Focus on interpretation and founder-level takeaway.
+- Do NOT list or expose individual component scores (Frequency, Recency, Sentiment).
+- Do NOT explain the math.
+
+3. Body of Evidence
+After the summary and metrics, present the qualitative evidence using the sections below.
+
+Use these headers EXACTLY and do NOT include filler labels like “Pattern” or “Theme”.
+
+• **Pain Expression** – emotionally loaded complaints and lived experience  
+• **Solution Seeking** – people actively asking for help, tips, or recommendations  
+• **Workaround Sharing** – detailed systems, routines, or hacks people have built  
+
+For each section:
+- Begin with a short explanatory paragraph describing what shows up across multiple posts.
+- Then include 3–6 of the strongest examples as short quotes or scenarios.
+- Use inline markdown links directly on the quotes or references.
+- End with a brief **Takeaway** paragraph synthesizing what the evidence signals.
+
+Final Synthesis:
+End with a concise synthesis that explains:
+- Why the pain is real
+- Where it bites hardest
+- 1–3 sharp wedge problems or user slices that would be most sensible to focus on next
+
+CRITICAL CITATION RULES:
+- You MUST ground all claims in the provided VERIFIED EXTERNAL DATA and structured tool output.
+- Use inline markdown links near quotes or references, e.g.:
+  “…users complain about X [Reddit thread](URL)” or “…as seen in [Source Title](URL)”.
+- Do NOT anonymize sources if a URL exists.
+- Do NOT invent URLs, citations, or metrics.
+`,
+
+
   PROMPT_MOD_3: `
   Primary Objective: Create a "Deep Dive Report" explaining root causes and quantifying cost.
   
