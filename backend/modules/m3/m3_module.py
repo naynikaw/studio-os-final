@@ -5,26 +5,28 @@ Refactored for FastAPI integration
 import os
 import json
 
-# Suppress gRPC/ALTS warnings
+# Suppress gRPC/ALTS warnings (harmless even when not using gRPC-based LLMs)
 os.environ.setdefault("GRPC_VERBOSITY", "ERROR")
 os.environ.setdefault("GLOG_minloglevel", "3")
 os.environ.setdefault("ABSL_LOG_SEVERITY_THRESHOLD", "3")
 
-import google.generativeai as genai
+from openai import OpenAI
 
-# Configure API key
-api_key = os.getenv("GEMINI_API_KEY")
-genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-2.5-pro')
+# Configure OpenAI client using OPENAI_API_KEY
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else OpenAI()
 
 def run_pipeline(problem: str) -> str:
     """
     Core pipeline function for M3 module.
     Analyzes the problem and returns JSON string with cost analysis.
     """
-    prompt = f"""You are a problem understanding and cost analysis expert.
+    system_prompt = (
+        "You are a problem understanding and cost analysis expert. "
+        "You deeply analyze business and product problems and return ONLY valid JSON."
+    )
 
-Task: Analyze the following problem and provide a comprehensive deep dive report.
+    prompt = f"""Task: Analyze the following problem and provide a comprehensive deep dive report.
 
 Problem: {problem}
 
@@ -75,8 +77,14 @@ Guidelines:
 Return ONLY valid JSON, no additional text."""
     
     try:
-        response = model.generate_content(prompt)
-        result_text = response.text.strip()
+        response = client.chat.completions.create(
+            model="gpt-5.1",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt},
+            ],
+        )
+        result_text = (response.choices[0].message.content or "").strip()
         
         # Try to extract JSON from response
         import re
