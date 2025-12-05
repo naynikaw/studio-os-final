@@ -1806,10 +1806,14 @@ def reddit_summary_markdown(problem: str, df: pd.DataFrame, pvi: Dict) -> str:
             if r.get("source") == "reddit_comment" and r.get("parent_post_title"):
                 parent_info = f"\n  *Comment on post: \"{short(r['parent_post_title'], 100)}\"*"
             
+            # Format permalink as clickable markdown link
+            permalink = r.get("permalink", "")
+            link_text = f"[View {source_type}]({permalink})" if permalink else ""
+            
             out.append(
                 f'- **{source_type}:** {solution_text}'
                 f'{parent_info}\n'
-                f'  — r/{r["subreddit"]} · {utc_str(r["created_utc"])} · {r["permalink"]}\n'
+                f'  — r/{r["subreddit"]} · {utc_str(r["created_utc"])} · {link_text}\n'
             )
         return out
 
