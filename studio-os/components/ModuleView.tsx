@@ -263,7 +263,71 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
                 </div>
               )}
               <div className="prose prose-studio max-w-none mb-12">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{displayOutput}</ReactMarkdown>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    // Custom text renderer to highlight bracket references
+                    p: ({ children, ...props }) => {
+                      const highlightBrackets = (content: React.ReactNode): React.ReactNode => {
+                        if (typeof content === 'string') {
+                          // Match patterns like [text] or [text; more text]
+                          const parts = content.split(/(\[[^\]]+\])/g);
+                          return parts.map((part, i) => {
+                            if (part.startsWith('[') && part.endsWith(']')) {
+                              return (
+                                <span
+                                  key={i}
+                                  className="bg-gradient-to-r from-studio-50 to-blue-50 text-studio-700 px-1.5 py-0.5 rounded-md text-sm font-medium border border-studio-200 mx-0.5 inline-block"
+                                  style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}
+                                >
+                                  {part}
+                                </span>
+                              );
+                            }
+                            return part;
+                          });
+                        }
+                        if (Array.isArray(content)) {
+                          return content.map((child, i) => (
+                            <React.Fragment key={i}>{highlightBrackets(child)}</React.Fragment>
+                          ));
+                        }
+                        return content;
+                      };
+                      return <p {...props}>{highlightBrackets(children)}</p>;
+                    },
+                    li: ({ children, ...props }) => {
+                      const highlightBrackets = (content: React.ReactNode): React.ReactNode => {
+                        if (typeof content === 'string') {
+                          const parts = content.split(/(\[[^\]]+\])/g);
+                          return parts.map((part, i) => {
+                            if (part.startsWith('[') && part.endsWith(']')) {
+                              return (
+                                <span
+                                  key={i}
+                                  className="bg-gradient-to-r from-studio-50 to-blue-50 text-studio-700 px-1.5 py-0.5 rounded-md text-sm font-medium border border-studio-200 mx-0.5 inline-block"
+                                  style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}
+                                >
+                                  {part}
+                                </span>
+                              );
+                            }
+                            return part;
+                          });
+                        }
+                        if (Array.isArray(content)) {
+                          return content.map((child, i) => (
+                            <React.Fragment key={i}>{highlightBrackets(child)}</React.Fragment>
+                          ));
+                        }
+                        return content;
+                      };
+                      return <li {...props}>{highlightBrackets(children)}</li>;
+                    }
+                  }}
+                >
+                  {displayOutput}
+                </ReactMarkdown>
               </div>
 
               {/* Sources/Citations Footer */}
@@ -312,8 +376,8 @@ export const ModuleView: React.FC<ModuleViewProps> = ({ definition, data, projec
                       {displayChat.map((msg, idx) => (
                         <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                           <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${msg.role === 'user'
-                              ? 'bg-studio-700 text-white rounded-br-none'
-                              : 'bg-white border border-gray-200 text-charcoal rounded-bl-none shadow-sm'
+                            ? 'bg-studio-700 text-white rounded-br-none'
+                            : 'bg-white border border-gray-200 text-charcoal rounded-bl-none shadow-sm'
                             }`}>
                             {/* Attachments */}
                             {msg.attachments && msg.attachments.length > 0 && (

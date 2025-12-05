@@ -1,7 +1,8 @@
 import { ModuleData, UserContext } from '../types';
 import { ENABLE_USER_CONTEXT } from '../constants';
 
-const API_BASE_URL = 'http://localhost:8000'; // Default local Flask port
+// Use environment variable for production, fallback to localhost for development
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export interface BackendResponse {
     success: boolean;

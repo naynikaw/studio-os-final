@@ -115,10 +115,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onClick={() => !isLocked && onSelectModule(module.id)}
                 disabled={isLocked}
                 className={`w-full flex items-center px-3 py-3 text-sm font-medium rounded-md transition-colors ${isActive
-                    ? 'bg-studio-100 text-studio-900'
-                    : isLocked
-                      ? 'text-gray-400 cursor-not-allowed'
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'bg-studio-100 text-studio-900'
+                  : isLocked
+                    ? 'text-gray-400 cursor-not-allowed'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   }`}
               >
                 <span className="mr-3 flex-shrink-0">{getStatusIcon(status)}</span>
@@ -129,11 +129,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </nav>
       </div>
 
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
-        <div className="text-xs text-gray-400 text-center">
-          Powered by Google Gemini 3 Pro
-        </div>
-      </div>
+
     </div>
   );
 };

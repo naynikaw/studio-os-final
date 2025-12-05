@@ -1,0 +1,24 @@
+# Render Blueprint for StudioOS Backend
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: studioos-backend
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: OPENAI_API_KEY
+        sync: false  # Set this in Render dashboard
+      - key: SERPAPI_KEY
+        sync: false  # Set this in Render dashboard
+      - key: NEWS_API_KEY
+        sync: false  # Optional
+      - key: ALPHAVANTAGE_API_KEY
+        sync: false  # Optional
+    healthCheckPath: /health
+    autoDeploy: true
