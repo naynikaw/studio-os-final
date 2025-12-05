@@ -69,7 +69,6 @@ def fetch_news_single_query(query: str) -> List[dict]:
                 "url": a.get("url"),
                 "ts": a.get("publishedAt"),
                 "source": a.get("source", {}).get("name"),
-                # description 方便后面做 NER / patterns
                 "description": a.get("description"),
             }
             for a in data.get("articles", [])[:5]
@@ -85,7 +84,6 @@ def fetch_news_multi(queries: List[str], max_total: int = 10) -> List[dict]:
     seen_urls = set()
 
     for q in queries or []:
-        # 不管是什么类型，先统一成字符串
         q = str(q).strip()
         if not q:
             continue
@@ -151,7 +149,6 @@ Return strictly valid JSON with:
         if isinstance(raw_queries, str):
             search_queries = [raw_queries]
         elif isinstance(raw_queries, list):
-            # 全部转成 string 并 strip
             search_queries = [
                 str(x).strip() for x in raw_queries
                 if str(x).strip()
